@@ -1,5 +1,16 @@
-SUMMARY:
+PORT: 5432
+IP_ADDR: ANY
 
+HOW TO USE:
+the easiest way to use this server is through telnet.  If you are using one machine:
+
+telnet 127.0.0.1(localhost) 5432
+
+If you are using two machines:
+
+telnet (server IP address) 5432  
+
+SUMMARY:
 this is a simple server that listens on a socket, accepts connections and creates threads to respond to each connection (up to 10 connections at a time).  Once a connection has been established, the server writes to the client the total amount of clients received and the total up-time of the server.  The client then inputs 5 separate variables, and the server reads them into a buffer, adds them, and then writes the sum to the client.     
 
 The first portion of the code is dedicated to building the server; server variables, buffers, socket creation and whatnot.  Once listen() is called the code enters a while loop where it listens for any connection, and once it receives a connection it spins off a thread to handle its request.
@@ -11,5 +22,7 @@ Void* server(void *arg)
 TODO:
 
 there is no escape character to properly terminate the server; I always terminate wit ^c.
+
+The buffer for the client inputs is only big enough for one character.  So a 2 will work fine, but not a 20.
 
 If the server is terminated while interacting with a client, there is a timeout of a couple seconds before that port is ready to accept connections again.  I'm not sure there is a solution to this one. 
