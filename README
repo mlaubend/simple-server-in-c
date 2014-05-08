@@ -1,0 +1,15 @@
+SUMMARY:
+
+this is a simple server that listens on a socket, accepts connections and creates threads to respond to each connection (up to 10 connections at a time).  Once a connection has been established, the server writes to the client the total amount of clients received and the total up-time of the server.  The client then inputs 5 separate variables, and the server reads them into a buffer, adds them, and then writes the sum to the client.     
+
+The first portion of the code is dedicated to building the server; server variables, buffers, socket creation and whatnot.  Once listen() is called the code enters a while loop where it listens for any connection, and once it receives a connection it spins off a thread to handle its request.
+
+The server returns to sleep once the thread is created.  The thread calls the function: 
+
+Void* server(void *arg)
+
+TODO:
+
+there is no escape character to properly terminate the server; I always terminate wit ^c.
+
+If the server is terminated while interacting with a client, there is a timeout of a couple seconds before that port is ready to accept connections again.  I'm not sure there is a solution to this one. 
